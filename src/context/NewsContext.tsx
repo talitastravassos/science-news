@@ -4,6 +4,7 @@ import axios from "axios";
 // global application state definition
 interface State {
   news: any;
+  currentPage: number;
   baseURL: string;
 }
 
@@ -24,14 +25,18 @@ export default class NewsProvider extends React.Component<{}, State> {
 
     this.state = {
       news: {},
-      baseURL: "https://news-serve-api.herokuapp.com/api/news/"
+      baseURL: "https://news-serve-api.herokuapp.com/api/news/",
+      currentPage: 1
     };
   }
 
   getNews = (page: number = 1) => {
     axios.get(`${this.state.baseURL}${page}`).then(res => {
-      // console.log(res)
-      this.setState({ news: res.data });
+      console.log(res)
+      this.setState({ 
+        news: res.data.news,
+        currentPage: res.data.page 
+      });
     });
   };
 
