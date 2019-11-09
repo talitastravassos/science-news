@@ -1,6 +1,7 @@
 import React from "react";
 import { NewsContext } from "../../context/NewsContext";
 import NewsCard from "../NewsCard";
+import styles from './styles.module.scss';
 
 export default function NewsList() {
   const {
@@ -14,7 +15,7 @@ export default function NewsList() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       {news.map((post: any) => {
         return <NewsCard post={post} key={post.id} />;
       })}
