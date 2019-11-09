@@ -1,18 +1,13 @@
 import React from "react";
 import "./App.css";
-import { NewsContext } from "./context/NewsContext";
+import NewsList from "./components/NewsList";
 
 const App = () => {
-  const {
-    action: { getNews }
-  } = React.useContext(NewsContext); // context api
-
-  React.useEffect(() => {
-    getNews()
-     // eslint-disable-next-line
-  }, []);
-
-  return <></>;
+  return (
+    <>
+      <NewsList />
+    </>
+  );
 };
 
 export default App;

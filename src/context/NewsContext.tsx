@@ -3,7 +3,7 @@ import axios from "axios";
 
 // global application state definition
 interface State {
-  news: any;
+  news: any[];
   currentPage: number;
   baseURL: string;
 }
@@ -24,7 +24,7 @@ export default class NewsProvider extends React.Component<{}, State> {
     super(props);
 
     this.state = {
-      news: {},
+      news: [],
       baseURL: "https://news-serve-api.herokuapp.com/api/news/",
       currentPage: 1
     };
@@ -32,16 +32,17 @@ export default class NewsProvider extends React.Component<{}, State> {
 
   getNews = (page: number = 1) => {
     axios.get(`${this.state.baseURL}${page}`).then(res => {
-      console.log(res)
+      // console.log(res)
       this.setState({ 
-        news: res.data.news,
+        news: res.data.data,
         currentPage: res.data.page 
       });
     });
   };
-
-  componentDidMount() {
-    this.getNews();
+  
+  componentDidUpdate() {
+    console.log(this.state)
+    // this.getNews();
   }
 
   render() {
