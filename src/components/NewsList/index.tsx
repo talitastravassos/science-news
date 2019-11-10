@@ -16,10 +16,10 @@ export default function NewsList() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <>
       {news.map((post: News) => {
         return <NewsCard post={post} key={post.id} />;
       })}
-    </div>
+    </>
   );
 }

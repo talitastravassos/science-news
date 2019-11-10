@@ -1,19 +1,51 @@
 .card{
-    box-shadow: 0px 1px 4px -1px rgba(42, 42, 42, 0.55);
+    box-shadow: 0px 1px 4px -1px rgba(228, 226, 226, 0.55);
     border-radius: 5px;
+    background-color: white;
     padding: 2%;
     margin-bottom: 3%;
     display: grid;
     grid-template-columns: 2fr 4fr;
-    grid-gap: 1rem;
+    grid-gap: 5px;
+
+    @media only screen and (max-width: 900px) {
+        grid-template-columns: 6fr;
+    }
 }
 
 .flex_container{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    p{
+        font-size: 1rem;
+    }
 }
 
 .image{
-    padding-top: 6%;
+    width: 100%;
+
+    @media only screen and (max-width: 900px) {
+        width: 100%;
+    }
+}
+
+
+.category{
+    color: rgb(38, 0, 255);
+    letter-spacing: 2px;
+    margin: 0;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.title{
+    font-family: 'Merriweather', serif;
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+.paragraph{
+    font-size: 1.2rem;
 }
