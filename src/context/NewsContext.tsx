@@ -1,9 +1,10 @@
 import React from "react";
 import axios from "axios";
+import { News } from "./news.types";
 
 // global application state definition
 interface State {
-  news: any[];
+  news: News[];
   currentPage: number;
   baseURL: string;
 }
