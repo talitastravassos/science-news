@@ -4,6 +4,7 @@ import NewsList from "../../components/NewsList";
 import Pagination from "../../components/Pagination";
 import { RouteComponentProps } from "react-router-dom";
 import { NewsContext } from "../../context/NewsContext";
+import Footer from "../../components/Footer";
 
 export default function News(props: RouteComponentProps) {
   const {
@@ -17,10 +18,13 @@ export default function News(props: RouteComponentProps) {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}> {titlePage.toUpperCase()} </h1>
-      <NewsList data={news} />
-      <Pagination {...props} />
-    </div>
+    <>
+      <div className={styles.container}>
+        <h1 className={styles.title}> {titlePage.toUpperCase()} </h1>
+        <NewsList data={news} />
+        <Pagination {...props} />
+      </div>
+      <Footer />
+    </>
   );
 }

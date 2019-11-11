@@ -3,7 +3,7 @@ import format from "date-fns/format";
 import styles from "./styles.module.scss";
 import { News } from "../../context/news.types";
 import { NewsContext } from "../../context/NewsContext";
-import { RouteComponentProps, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 interface Props {
   post: News;
 }
