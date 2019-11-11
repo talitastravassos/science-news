@@ -1,14 +1,9 @@
 import React from "react";
 import "./App.scss";
-import NewsList from "./components/NewsList";
+import News from "./views/news";
 
 const App = () => {
-  return (
-    <div className="container">
-      <h1 className="title">LATEST NEWS ABOUT SCIENCE</h1>
-      <NewsList />
-    </div>
-  );
+  return <News />;
 };
 
 export default App;
