@@ -39,12 +39,16 @@ export default class NewsProvider extends React.Component<{}, State> {
   getNews = (page: number = 1) => {
     this.setState({ loading: true })
     axios.get(`${this.state.baseURL}${page}`).then(res => {
-      // console.log(res)
-      this.setState({ 
-        news: res.data.data,
-        currentPage: res.data.page,
-        loading: false
-      });
+      if(!res.data.data){
+        this.setState({ loading: false })
+      } else {
+        this.setState({ 
+          news: res.data.data,
+          currentPage: res.data.page,
+          loading: false
+        });
+      }
+      console.log(res)
     });
   };
 
@@ -52,12 +56,16 @@ export default class NewsProvider extends React.Component<{}, State> {
     this.setState({ loading: true })
     axios.get(`${this.state.baseURL}category/${category}/${page}`).then(res => {
       // console.log(res)
-      this.setState({ 
-        news: res.data.data,
-        currentPage: res.data.page,
-        titlePage: title,
-        loading: false
-      });
+      if(!res.data.data){
+        this.setState({ loading: false })
+      } else {
+        this.setState({ 
+          news: res.data.data,
+          currentPage: res.data.page,
+          loading: false,
+          titlePage: title,
+        });
+      }
   });
   }
   
