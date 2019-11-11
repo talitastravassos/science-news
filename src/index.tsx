@@ -11,7 +11,8 @@ ReactDOM.render(
     <Switch>
       <NewsProvider>
         <Route path="/" exact component={App} />
-        <Route path="/page/:page" component={News} />
+        <Route path="/page/:page" exact component={News} />
+        <Route path="/category/:category/:page?" exact component={News} />
       </NewsProvider>
     </Switch>
   </BrowserRouter>,

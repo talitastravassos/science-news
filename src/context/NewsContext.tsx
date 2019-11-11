@@ -8,6 +8,7 @@ interface State {
   currentPage: number;
   baseURL: string;
   loading: boolean;
+  titlePage: string;
 }
 
 // definition of type IContext used by context api
@@ -15,6 +16,7 @@ interface IContext {
   state: State;
   action: {
     getNews(page?: number): void;
+    getCategory(category: string, title: string, page?: number): void;
   };
 }
 
@@ -29,7 +31,8 @@ export default class NewsProvider extends React.Component<{}, State> {
       news: [],
       baseURL: "https://news-serve-api.herokuapp.com/api/news/",
       currentPage: 1,
-      loading: true
+      loading: true,
+      titlePage: 'LATEST NEWS ABOUT SCIENCE'
     };
   }
 
@@ -44,6 +47,19 @@ export default class NewsProvider extends React.Component<{}, State> {
       });
     });
   };
+
+  getCategory = (category: string, title: string, page: number = 1) => {
+    this.setState({ loading: true })
+    axios.get(`${this.state.baseURL}category/${category}/${page}`).then(res => {
+      // console.log(res)
+      this.setState({ 
+        news: res.data.data,
+        currentPage: res.data.page,
+        titlePage: title,
+        loading: false
+      });
+  });
+  }
   
   componentDidUpdate() {
     console.log(this.state)
@@ -55,7 +71,8 @@ export default class NewsProvider extends React.Component<{}, State> {
     const value = {
       state: { ...this.state },
       action: {
-        getNews: this.getNews
+        getNews: this.getNews,
+        getCategory: this.getCategory
       }
     };
 

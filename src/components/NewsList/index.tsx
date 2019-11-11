@@ -5,16 +5,14 @@ import NewsCard from "../NewsCard";
 import { News } from "../../context/news.types";
 import styles from "./styles.module.scss";
 
-export default function NewsList() {
-  const {
-    state: { news, loading },
-    action: { getNews }
-  } = React.useContext(NewsContext); // context api
+interface Props {
+  data: News[];
+}
 
-  React.useEffect(() => {
-    getNews();
-    // eslint-disable-next-line
-  }, []);
+export default function NewsList({ data }: Props) {
+  const {
+    state: { loading }
+  } = React.useContext(NewsContext); // context api
 
   return (
     <>
@@ -23,7 +21,7 @@ export default function NewsList() {
           <Loader type="TailSpin" color="#888888" height={150} width={150} />
         </div>
       ) : (
-        news.map((post: News) => {
+        data.map((post: News) => {
           return <NewsCard post={post} key={post.id} />;
         })
       )}

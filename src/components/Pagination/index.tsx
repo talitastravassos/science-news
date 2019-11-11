@@ -18,9 +18,11 @@ export default function Pagination({ history }: RouteComponentProps) {
   };
 
   React.useEffect(() => {
-    history.push({
-      pathname: `/page/${currentPage}`
-    });
+    if (currentPage !== 1){
+      history.push({
+        pathname: `/page/${currentPage}`
+      });
+    }
      // eslint-disable-next-line
   }, [currentPage]);
 

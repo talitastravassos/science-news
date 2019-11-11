@@ -2,17 +2,31 @@ import React from "react";
 import format from "date-fns/format";
 import styles from "./styles.module.scss";
 import { News } from "../../context/news.types";
+import { NewsContext } from "../../context/NewsContext";
+import { RouteComponentProps, Link } from "react-router-dom";
 interface Props {
   post: News;
 }
 
 export default function NewsCard({ post }: Props) {
+  const {
+    action: { getCategory }
+  } = React.useContext(NewsContext); // context api
+
+  const onClickCategory = () => {
+    getCategory(post.category_tag, post.category);
+  };
+
   return (
     <div className={styles.card}>
       <img src={post.image} alt={post.title} className={styles.image} />
 
       <div className={styles.text_container}>
-        <p className={styles.category}>{post.category.toUpperCase()}</p>
+        <Link to={`/category/${post.category_tag}`} replace>
+          <p className={styles.category} onClick={onClickCategory}>
+            {post.category.toUpperCase()}
+          </p>
+        </Link>
         <h1 className={styles.title}>{post.title}</h1>
         <p className={styles.paragraph}>{post.summary}</p>
         <div className={styles.flex_container}>
@@ -25,7 +39,7 @@ export default function NewsCard({ post }: Props) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Read all
+          READ ALL
         </a>
       </div>
     </div>
