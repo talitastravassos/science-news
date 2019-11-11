@@ -7,6 +7,7 @@ interface State {
   news: News[];
   currentPage: number;
   baseURL: string;
+  loading: boolean;
 }
 
 // definition of type IContext used by context api
@@ -27,16 +28,19 @@ export default class NewsProvider extends React.Component<{}, State> {
     this.state = {
       news: [],
       baseURL: "https://news-serve-api.herokuapp.com/api/news/",
-      currentPage: 1
+      currentPage: 1,
+      loading: true
     };
   }
 
   getNews = (page: number = 1) => {
+    this.setState({ loading: true })
     axios.get(`${this.state.baseURL}${page}`).then(res => {
       // console.log(res)
       this.setState({ 
         news: res.data.data,
-        currentPage: res.data.page 
+        currentPage: res.data.page,
+        loading: false
       });
     });
   };
