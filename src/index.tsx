@@ -10,8 +10,8 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <NewsProvider>
-        <Route path="/" exact={true} component={App} />
-        <Route path="/:page/" component={News} />
+        <Route path="/" exact component={App} />
+        <Route path="/page/:page" component={News} />
       </NewsProvider>
     </Switch>
   </BrowserRouter>,

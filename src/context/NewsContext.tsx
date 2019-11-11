@@ -13,7 +13,7 @@ interface State {
 interface IContext {
   state: State;
   action: {
-    getNews(): void;
+    getNews(page?: number): void;
   };
 }
 
