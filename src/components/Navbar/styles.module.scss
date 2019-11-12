@@ -1,0 +1,17 @@
+.navbar {
+  background-color: #110133;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 1.5%;
+
+  h2 {
+    font-family: "Merriweather", serif;
+    color: white;
+    font-size: 1.8rem;
+    letter-spacing: 6px;
+    margin-bottom: 0;
+
+  }
+}

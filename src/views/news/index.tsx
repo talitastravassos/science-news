@@ -5,6 +5,7 @@ import Pagination from "../../components/Pagination";
 import { RouteComponentProps } from "react-router-dom";
 import { NewsContext } from "../../context/NewsContext";
 import Footer from "../../components/Footer";
+import Navbar from "../../components/Navbar";
 
 export default function News(props: RouteComponentProps) {
   const {
@@ -18,20 +19,21 @@ export default function News(props: RouteComponentProps) {
   }, []);
 
   const controls = (page: number) => {
-    getNews(page)
-  }
+    getNews(page);
+  };
 
   React.useEffect(() => {
-    if (currentPage !== 1){
-     props.history.push({
+    if (currentPage !== 1) {
+      props.history.push({
         pathname: `/page/${currentPage}`
       });
     }
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [currentPage]);
 
   return (
     <>
+      <Navbar />
       <div className={styles.container}>
         <h1 className={styles.title}> {titlePage.toUpperCase()} </h1>
         <NewsList data={news} />
