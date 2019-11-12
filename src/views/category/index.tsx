@@ -17,7 +17,7 @@ export default function Category(props: RouteComponentProps) {
     // eslint-disable-next-line
   }, []);
 
-  const pagination = (page: number) => {
+  const controls = (page: number) => {
     getCategory(page)
   }
 
@@ -36,7 +36,7 @@ export default function Category(props: RouteComponentProps) {
       <div className={styles.container}>
         <h1 className={styles.title}> {titlePage.toUpperCase()} </h1>
         <NewsList data={news} />
-        <Pagination pagination={pagination} />
+        <Pagination controls={controls} />
       </div>
       <Footer />
     </>
