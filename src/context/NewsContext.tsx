@@ -9,6 +9,7 @@ interface State {
   baseURL: string;
   loading: boolean;
   titlePage: string;
+  currentCategory: string;
 }
 
 // definition of type IContext used by context api
@@ -16,7 +17,8 @@ interface IContext {
   state: State;
   action: {
     getNews(page?: number): void;
-    getCategory(category: string, title: string, page?: number): void;
+    getCategory(page?: number): void;
+    setCategory(category: string, title: string): void;
   };
 }
 
@@ -32,46 +34,56 @@ export default class NewsProvider extends React.Component<{}, State> {
       baseURL: "https://news-serve-api.herokuapp.com/api/news/",
       currentPage: 1,
       loading: true,
-      titlePage: 'LATEST NEWS ABOUT SCIENCE'
+      titlePage: "LATEST NEWS ABOUT SCIENCE",
+      currentCategory: ""
     };
   }
 
   getNews = (page: number = 1) => {
-    this.setState({ loading: true })
+    this.setState({ loading: true });
     axios.get(`${this.state.baseURL}${page}`).then(res => {
-      if(!res.data.data){
-        this.setState({ loading: false })
+      // console.log(res)
+      if (!res.data.data) {
+        this.setState({ loading: false });
       } else {
-        this.setState({ 
+        this.setState({
           news: res.data.data,
           currentPage: res.data.page,
           loading: false
         });
       }
-      console.log(res)
     });
   };
 
-  getCategory = (category: string, title: string, page: number = 1) => {
-    this.setState({ loading: true })
-    axios.get(`${this.state.baseURL}category/${category}/${page}`).then(res => {
+  setCategory = (category: string, title: string) => {
+    this.setState({
+      currentCategory: category,
+      titlePage: title
+    });
+
+    this.getCategory()
+  };
+
+  getCategory = ( page: number = 1) => {
+    const { currentCategory} = this.state;
+
+    this.setState({ loading: true });
+    axios.get(`${this.state.baseURL}category/${currentCategory}/${page}`).then(res => {
       // console.log(res)
-      if(!res.data.data){
-        this.setState({ loading: false })
+      if (!res.data.data) {
+        this.setState({ loading: false });
       } else {
-        this.setState({ 
+        this.setState({
           news: res.data.data,
           currentPage: res.data.page,
-          loading: false,
-          titlePage: title,
+          loading: false
         });
       }
-  });
-  }
-  
+    });
+  };
+
   componentDidUpdate() {
-    console.log(this.state)
-    // this.getNews();
+    console.log(this.state);
   }
 
   render() {
@@ -80,7 +92,8 @@ export default class NewsProvider extends React.Component<{}, State> {
       state: { ...this.state },
       action: {
         getNews: this.getNews,
-        getCategory: this.getCategory
+        getCategory: this.getCategory,
+        setCategory: this.setCategory
       }
     };
 

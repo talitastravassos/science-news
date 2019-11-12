@@ -6,29 +6,30 @@ import { RouteComponentProps } from "react-router-dom";
 import { NewsContext } from "../../context/NewsContext";
 import Footer from "../../components/Footer";
 
-export default function News(props: RouteComponentProps) {
+export default function Category(props: RouteComponentProps) {
   const {
-    state: { news, titlePage, currentPage },
-    action: { getNews }
+    state: { news, titlePage, currentPage, currentCategory },
+    action: { getCategory }
   } = React.useContext(NewsContext); // context api
 
   React.useEffect(() => {
-    getNews();
+    getCategory();
     // eslint-disable-next-line
   }, []);
 
   const pagination = (page: number) => {
-    getNews(page)
+    getCategory(page)
   }
 
   React.useEffect(() => {
     if (currentPage !== 1){
      props.history.push({
-        pathname: `/page/${currentPage}`
+        pathname: `/category/${currentCategory}/${currentPage}`
       });
     }
      // eslint-disable-next-line
   }, [currentPage]);
+
 
   return (
     <>

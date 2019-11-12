@@ -10,11 +10,11 @@ interface Props {
 
 export default function NewsCard({ post }: Props) {
   const {
-    action: { getCategory }
+    action: { setCategory }
   } = React.useContext(NewsContext); // context api
 
   const onClickCategory = () => {
-    getCategory(post.category_tag, post.category);
+    setCategory(post.category_tag, post.category);
   };
 
   return (

@@ -5,6 +5,7 @@ import "./index.scss";
 import App from "./App";
 import NewsProvider from "./context/NewsContext";
 import News from "./views/news";
+import Category from "./views/category";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -12,7 +13,7 @@ ReactDOM.render(
       <NewsProvider>
         <Route path="/" exact component={App} />
         <Route path="/page/:page" exact component={News} />
-        <Route path="/category/:category/:page?" exact component={News} />
+        <Route path="/category/:category/:page?" exact component={Category} />
       </NewsProvider>
     </Switch>
   </BrowserRouter>,

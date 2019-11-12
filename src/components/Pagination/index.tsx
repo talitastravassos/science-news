@@ -1,42 +1,28 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import { NewsContext } from "../../context/NewsContext";
-import { RouteComponentProps } from "react-router-dom";
 
-export default function Pagination({ history }: RouteComponentProps) {
+interface Props {
+  pagination(page: number): void;
+}
+
+export default function Pagination({ pagination }: Props) {
   const {
-    state: { currentPage },
-    action: { getNews }
+    state: { currentPage }
   } = React.useContext(NewsContext); // context api
 
-  const nextPage = () => {
-    getNews(currentPage + 1);
-  };
-
-  const lastPage = () => {
-    getNews(currentPage - 1);
-  };
-
-  React.useEffect(() => {
-    if (currentPage !== 1){
-      history.push({
-        pathname: `/page/${currentPage}`
-      });
-    }
-     // eslint-disable-next-line
-  }, [currentPage]);
 
   return (
     <div className={styles.container}>
       {currentPage === 1 ? (
         <></>
       ) : (
-        <button className="ui button big" onClick={lastPage}>
+        <button className="ui button big" onClick={() => pagination(currentPage - 1)}>
           Last Page
         </button>
       )}
 
-      <button className="ui button big" onClick={nextPage}>
+      <button className="ui button big" onClick={() => pagination(currentPage + 1)}>
         Next Page
       </button>
     </div>
