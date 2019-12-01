@@ -45,6 +45,7 @@ export default class NewsProvider extends React.Component<{}, State> {
       // console.log(res)
       if (!res.data.data) {
         this.setState({ loading: false });
+        this.getNews(this.state.currentPage + 2);
       } else {
         this.setState({
           news: res.data.data,
@@ -61,25 +62,30 @@ export default class NewsProvider extends React.Component<{}, State> {
       titlePage: title
     });
 
-    this.getCategory()
+    this.getCategory();
   };
 
-  getCategory = ( page: number = 1) => {
-    const { currentCategory} = this.state;
+  getCategory = (page: number = 1) => {
+    const { currentCategory } = this.state;
 
     this.setState({ loading: true });
-    axios.get(`${this.state.baseURL}category/${currentCategory}/${page}`).then(res => {
-      // console.log(res)
-      if (!res.data.data) {
-        this.setState({ loading: false });
-      } else {
-        this.setState({
-          news: res.data.data,
-          currentPage: res.data.page,
-          loading: false
-        });
-      }
-    });
+    axios
+      .get(`${this.state.baseURL}category/${currentCategory}/${page}`)
+      .then(res => {
+        // console.log(res)
+        if (!res.data.data) {
+          this.setState({
+            loading: false
+          });
+          // this.getCategory(this.state.currentPage + 2);
+        } else {
+          this.setState({
+            news: res.data.data,
+            currentPage: res.data.page,
+            loading: false
+          });
+        }
+      });
   };
 
   componentDidUpdate() {

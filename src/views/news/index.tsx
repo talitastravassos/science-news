@@ -34,12 +34,14 @@ export default function News(props: RouteComponentProps) {
   return (
     <>
       <Navbar />
-      <div className={styles.container}>
-        <h1 className={styles.title}> {titlePage.toUpperCase()} </h1>
-        <NewsList data={news} />
-        <Pagination controls={controls} />
+      <div className={styles.container_page}>
+        <div className={styles.container_news}>
+          <h1 className={styles.title}> {titlePage.toUpperCase()} </h1>
+          <NewsList data={news} />
+          <Pagination controls={controls} />
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 }

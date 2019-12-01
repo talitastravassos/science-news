@@ -1,4 +1,9 @@
-.container {
+.container_page{
+  position: relative;
+  min-height: 100vh;
+}
+
+.container_news {
     margin: 5%;
   
     .title {

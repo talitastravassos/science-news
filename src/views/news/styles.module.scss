@@ -1,16 +1,21 @@
-.container {
-    margin: 5%;
-  
-    .title {
-      font-family: "Merriweather", serif;
-      color: white;
-      text-align: center;
-      font-size: 4rem;
-      letter-spacing: 6px;
-  
-      @media only screen and (max-width: 900px) {
-        font-size: 2rem;
-      }
+.container_page{
+  position: relative;
+  min-height: 100vh;
+}
+
+.container_news {
+  margin: 5%;
+  // margin-bottom: 10%;
+
+  .title {
+    font-family: "Merriweather", serif;
+    color: white;
+    text-align: center;
+    font-size: 4rem;
+    letter-spacing: 6px;
+
+    @media only screen and (max-width: 900px) {
+      font-size: 2rem;
     }
-  
   }
+}
