@@ -2,6 +2,9 @@
 
 In the project directory:
 
+### Science News API
+- https://github.com/talitastravassos/science-news-api
+
 ### Install dependencies
 
 - `npm install`
